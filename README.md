@@ -1,6 +1,8 @@
 # multitenant
 
-A test app for using mutitenancy in hibernate 5.
+A test app for using mutitenancy in hibernate 5 in a web app to run on payara micro.
+
+    java -jar payara-micro-4.1.2.172.jar --deploy target/multitenant-1.0-SNAPSHOT.war
 
 The first problem was a clash in the jboss logging classes in bean-validator inside payara-micro.
 To get round this, remove these classes from the bean-validator module and repackage it.
