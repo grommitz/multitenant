@@ -10,4 +10,16 @@
         <param-value>Development</param-value>
     </context-param>
 
+    <data-source>
+        <name>java:global/myds</name>
+        <class-name>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</class-name>
+        <server-name>localhost</server-name>
+        <port-number>3306</port-number>
+        <database-name>masterdb</database-name>
+        <url>jdbc:mysql://localhost:3306/masterdb</url>
+        <user>root</user>
+        <password>helloroot</password>
+        <max-pool-size>10</max-pool-size>
+        <min-pool-size>2</min-pool-size>
+    </data-source>
 </web-app>

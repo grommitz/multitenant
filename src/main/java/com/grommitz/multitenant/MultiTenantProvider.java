@@ -16,18 +16,18 @@ public class MultiTenantProvider implements MultiTenantConnectionProvider, Servi
 
 	private static final long serialVersionUID = 1L;
 	private DataSource dataSource;
-	private final String jndiName = "java:app/jdbc/hibernate";
-//	private final String jndiName = "java:/hibernate";
+	private final String dataSourceJndiName = "java:global/myds";
 
 	@Override
 	public boolean supportsAggressiveRelease() {
 		return false;
 	}
+
 	@Override
 	public void injectServices(ServiceRegistryImplementor serviceRegistry) {
 		try {
 			final Context init = new InitialContext();
-			dataSource = (DataSource) init.lookup(jndiName);
+			dataSource = (DataSource) init.lookup(dataSourceJndiName);
 		} catch (final NamingException e) {
 			throw new RuntimeException(e);
 		}

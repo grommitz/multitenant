@@ -8,7 +8,7 @@ import java.util.List;
 @Stateless
 public class PersonDao {
 
-	@PersistenceContext
+	@PersistenceContext(unitName = "mypu")
 	private EntityManager entityManager;
 
 	public List<Person> getAll() {
