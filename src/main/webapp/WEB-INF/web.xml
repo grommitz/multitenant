@@ -12,11 +12,11 @@
 
     <data-source>
         <name>java:global/myds</name>
-        <class-name>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</class-name>
+        <class-name>com.mysql.cj.jdbc.MysqlXADataSource</class-name>
         <server-name>localhost</server-name>
         <port-number>3306</port-number>
         <database-name>masterdb</database-name>
-        <url>jdbc:mysql://localhost:3306/masterdb</url>
+        <url>jdbc:mysql://192.168.0.36:3306/masterdb?sslMode=DISABLED</url>
         <user>root</user>
         <password>helloroot</password>
         <max-pool-size>10</max-pool-size>
