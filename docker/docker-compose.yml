@@ -1,0 +1,23 @@
+version: "2.1"
+
+services:
+  mysql:
+    image: mysql:8.0.21
+    container_name: mysql8-multitenant
+    networks:
+      - elastic_net
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      - MYSQL_ROOT_PASSWORD=helloroot
+      - MYSQL_DATABASE=multitenantdb
+      - MYSQL_USER=hello
+      - MYSQL_PASSWORD=hello
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d      
+    ports:
+      - 3306:3306
+
+networks:
+  elastic_net:
+    driver: bridge
