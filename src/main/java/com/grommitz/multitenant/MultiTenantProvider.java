@@ -11,12 +11,14 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class MultiTenantProvider implements MultiTenantConnectionProvider, ServiceRegistryAwareService {
 
-	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(MultiTenantProvider.class.getSimpleName());
 	private DataSource dataSource;
 	private final String dataSourceJndiName = "java:global/myds";
+	public static final String MASTERDB = "multitenantdb";
 
 	@Override
 	public boolean supportsAggressiveRelease() {
@@ -37,18 +39,23 @@ public class MultiTenantProvider implements MultiTenantConnectionProvider, Servi
 	public boolean isUnwrappableAs(Class clazz) {
 		return false;
 	}
+
 	@Override
 	public <T> T unwrap(Class<T> clazz) {
 		return null;
 	}
+
 	@Override
 	public Connection getAnyConnection() throws SQLException {
 		final Connection connection = dataSource.getConnection();
 		return connection;
 	}
+
 	@Override
 	public Connection getConnection(String tenantIdentifier) throws SQLException {
+		logger.info("getting connection...");
 		final Connection connection = getAnyConnection();
+		logger.info("USE " + tenantIdentifier);
 		try {
 			connection.createStatement().execute("USE '" + tenantIdentifier + "'");
 		} catch (final SQLException e) {
@@ -56,15 +63,17 @@ public class MultiTenantProvider implements MultiTenantConnectionProvider, Servi
 		}
 		return connection;
 	}
+
 	@Override
 	public void releaseAnyConnection(Connection connection) throws SQLException {
 		try {
-			connection.createStatement().execute("USE masterdb");
+			connection.createStatement().execute("USE " + MASTERDB);
 		} catch (final SQLException e) {
-			throw new HibernateException("Error trying to alter schema [masterdb]", e);
+			throw new HibernateException("Error trying to alter schema [" + MASTERDB + "]", e);
 		}
 		connection.close();
 	}
+
 	@Override
 	public void releaseConnection(String tenantIdentifier, Connection connection) throws SQLException {
 		releaseAnyConnection(connection);

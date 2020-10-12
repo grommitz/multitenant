@@ -4,13 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.envisional</groupId>
+    <groupId>com.github.grommitz</groupId>
     <artifactId>multitenant</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <properties>
-        <hibernate.version>5.4.0.Final</hibernate.version>
+        <hibernate.version>5.4.22.Final</hibernate.version>
+        <jakartaee.version>8.0.0</jakartaee.version>
+        <jackson.version>2.10.2</jackson.version>
+        <jersey.version>2.30</jersey.version>
     </properties>
 
     <build>
@@ -35,35 +38,29 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.14</version>
+            <version>8.0.21</version>
         </dependency>
 
         <!-- provided (by payara) deps -->
 
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0</version>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakartaee.version}</version>
             <scope>provided</scope>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>fish.payara.extras</groupId>-->
-            <!--<artifactId>payara-micro</artifactId>-->
-            <!--<version>4.1.2.172</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
-            <version>2.27</version>
+            <version>${jersey.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-base</artifactId>
-            <version>2.9.8</version>
+            <version>${jackson.version}</version>
             <scope>provided</scope>
         </dependency>
 

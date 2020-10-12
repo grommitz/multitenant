@@ -2,4 +2,7 @@
 target/
 .idea/
 *.jar
+docker/data
+.classpath
+.project
 
