@@ -10,7 +10,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <hibernate.version>5.4.22.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <jakartaee.version>8.0.0</jakartaee.version>
         <jackson.version>2.10.2</jackson.version>
         <jersey.version>2.30</jersey.version>
